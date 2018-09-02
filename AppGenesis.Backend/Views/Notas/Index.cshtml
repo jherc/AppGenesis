@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AppGenesis.Domain.Nota>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Materia.Nrc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nnota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Corte)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Materia.Nrc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nnota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corte)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdNota }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Details", "Details", new { id=item.IdNota }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdNota }, new { @class = "btn btn-danger" })
+        </td>
+    </tr>
+}
+
+</table>

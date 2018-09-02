@@ -166,7 +166,18 @@
                 Email,
                 Password);
 
-            if (response == null || string.IsNullOrEmpty(response.AccessToken))
+            if (response == null)
+            {
+                IsRunning = false;
+                IsEnabled = true;
+                await dialogService.ShowMessage(
+                    "Error",
+                    "The service is not available, please try latter.");
+                Password = null;
+                return;
+            }
+
+            if (string.IsNullOrEmpty(response.AccessToken))
             {
                 IsRunning = false;
                 IsEnabled = true;
@@ -176,6 +187,9 @@
             }
 
             await dialogService.ShowMessage("Taran!!", "Welcome!!");
+
+            IsRunning = false;
+            IsEnabled = true;
         }
         #endregion
     }
