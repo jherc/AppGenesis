@@ -1,17 +1,15 @@
 ﻿namespace AppGenesis.API.Controllers
 {
-    using System;
+    using Domain;
+    using Models;
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Net;
-    using System.Net.Http;
     using System.Threading.Tasks;
     using System.Web.Http;
     using System.Web.Http.Description;
-    using AppGenesis.Domain;
 
     [Authorize]
     public class MateriasController : ApiController
@@ -19,9 +17,35 @@
         private DataContext db = new DataContext();
 
         // GET: api/Materias
-        public IQueryable<Materia> GetMaterias()
+        public async Task<IHttpActionResult> GetMaterias()
         {
-            return db.Materias;
+            var materias = await db.Materias.ToListAsync();
+
+            var materiasResponse = new List<MateriaResponse>();
+
+            foreach(var materia in materias)
+            {
+                var notasResponse = new List<NotaResponse>();
+                foreach (var nota in materia.Notas)
+                {
+                    notasResponse.Add(new NotaResponse
+                    {
+                      IdNota = nota.IdNota,
+                      Nnota = nota.Nnota,
+                      Corte = nota.Corte,
+                    });
+                }
+
+                materiasResponse.Add(new MateriaResponse {
+                    IdMateria = materia.IdMateria,
+                    Nombre = materia.Nombre,
+                    Nrc = materia.Nrc,
+                    Notas = notasResponse,
+                    
+                });
+            }
+
+            return Ok(materiasResponse);
         }
 
         // GET: api/Materias/5

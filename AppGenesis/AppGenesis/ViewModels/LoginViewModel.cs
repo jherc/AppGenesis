@@ -1,10 +1,11 @@
 ﻿namespace AppGenesis.ViewModels
 {
     using GalaSoft.MvvmLight.Command;
-    using System;
     using System.ComponentModel;
     using System.Windows.Input;
     using Services;
+    using Views;
+    using Xamarin.Forms;
     public class LoginViewModel : INotifyPropertyChanged
     {
         #region Events
@@ -186,7 +187,16 @@
                 return;
             }
 
-            await dialogService.ShowMessage("Taran!!", "Welcome!!");
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Token = response;
+            mainViewModel.Notas = new NotasViewModel();
+
+            //await dialogService.ShowMessage("Taran!!", "Welcome!!");
+            await Application.Current.MainPage.Navigation.PushAsync(
+                new NotasView());
+
+            Email = null;
+            Password = null;
 
             IsRunning = false;
             IsEnabled = true;
