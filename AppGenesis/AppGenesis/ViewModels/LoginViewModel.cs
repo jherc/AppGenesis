@@ -119,6 +119,9 @@
             ApiService = new ApiService();
             dialogService = new DialogService();
 
+            Email = "jhon@gmail.com";
+            Password = "123456";
+
             IsEnabled = true;
             IsToggled = true;
         }
@@ -189,11 +192,11 @@
 
             var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Token = response;
-            mainViewModel.Notas = new NotasViewModel();
+            mainViewModel.Materias = new MateriasViewModel();
 
             //await dialogService.ShowMessage("Taran!!", "Welcome!!");
             await Application.Current.MainPage.Navigation.PushAsync(
-                new NotasView());
+                new MateriasView());
 
             Email = null;
             Password = null;

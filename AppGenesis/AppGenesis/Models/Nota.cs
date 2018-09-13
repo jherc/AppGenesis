@@ -2,7 +2,10 @@
 {
     public class Nota
     {
-        public int IdFacultad { get; set; }
-        public string NombreFacultad { get; set; }
+        public int IdNota { get; set; }
+
+        public string Nnota { get; set; }
+
+        public string Corte { get; set; }
     }
 }

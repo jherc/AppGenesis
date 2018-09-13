@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppGenesis.Views.NotasView"
+             x:Class="AppGenesis.Views.MateriasView"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             Title="Notas">
+             Title="Materias">
     <ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Notas}"
+            BindingContext="{Binding Materias}"
             Padding="5">
             <ListView
                 HasUnevenRows="True"
-                ItemsSource="{Binding Notas}">
+                ItemsSource="{Binding MateriasList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -22,17 +22,17 @@
                                 <Label 
                                   Grid.Column="0"
                                   HorizontalOptions="FillAndExpand"
-                                  FontSize="Medium"
+                                  FontSize="Large"
                                   VerticalOptions="Center"
-                                  Text="{Binding Nnota}">
+                                  Text="{Binding Nombre}">
                                 </Label>
-                                <Label 
-                                  Grid.Column="1"
-                                  HorizontalOptions="FillAndExpand"
-                                  FontSize="Medium"
-                                  VerticalOptions="Center"
-                                  Text="{Binding Corte}">
-                                </Label>
+                                <Image 
+                                  HorizontalOptions="End"
+                                  Source="ic_chevron_right">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding SelectMateriaCommand}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

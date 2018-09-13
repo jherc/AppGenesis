@@ -16,6 +16,12 @@
             get;
             set;
         }
+
+        public MateriasViewModel Materias
+        {
+            get;
+            set;
+        }
         public TokenResponse Token
         {
             get;
